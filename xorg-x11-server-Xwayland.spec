@@ -1,4 +1,4 @@
-%global commit 1126d55f80fb681747d27180f480bb207f50e751
+%global commit cec99a3811bc45bcf74309c5c053d0c8a740db54
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 %global gitdate 20240515
@@ -8,7 +8,7 @@
 
 Summary:   Xwayland
 Name:      xorg-x11-server-Xwayland
-Version:   24.1.0
+Version:   24.1.1
 Release:   1%{?gitdate:.%{gitdate}git%{shortcommit}}%{?dist}
 
 URL:       http://www.x.org
@@ -144,6 +144,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_libdir}/pkgconfig/xwayland.pc
 
 %changelog
+* Wed July 12 2024 Jack Greiner <jack@emoss.org> - 24.1.1-1
+- xwayland 24.1.1
+
 * Wed May 15 2024 Jack Greiner <jack@emoss.org> - 24.1.0-1
 - xwayland 24.1.0
 
