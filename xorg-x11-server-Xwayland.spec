@@ -134,9 +134,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/xwayland/protocol.txt
 
 %files devel
+%{_libdir}/pkgconfig/xwayland.pc
 
 %changelog
-* Wed August 11 2024 Jack Greiner <jack@emoss.org> - 24.1.2-1
+* Sun August 11 2024 Jack Greiner <jack@emoss.org> - 24.1.2-1
 - xwayland 24.1.2
 
 * Wed July 12 2024 Jack Greiner <jack@emoss.org> - 24.1.1-1
