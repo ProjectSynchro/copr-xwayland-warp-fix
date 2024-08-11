@@ -1,7 +1,7 @@
-%global commit cec99a3811bc45bcf74309c5c053d0c8a740db54
+%global commit 9a55c402aa803fb10e39ab4fd18a709d0cd06fd4
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
-%global gitdate 20240515
+#global gitdate 20230426
 %global pkgname %{?gitdate:xserver}%{!?gitdate:xwayland}
 
 %global default_font_path "catalogue:/etc/X11/fontpath.d,built-ins"
@@ -36,7 +36,6 @@ BuildRequires: desktop-file-utils
 
 BuildRequires: pkgconfig(wayland-client) >= 1.21.0
 BuildRequires: pkgconfig(wayland-protocols) >= 1.34
-BuildRequires: pkgconfig(wayland-eglstream-protocols)
 
 BuildRequires: pkgconfig(epoxy) >= 1.5.5
 BuildRequires: pkgconfig(fontenc)
@@ -103,15 +102,9 @@ necessary for developing Wayland compositors using Xwayland.
 %prep
 %autosetup -S git_am -n %{pkgname}-%{?gitdate:%{commit}}%{!?gitdate:%{version}}
 
-%if ! 0%{?gitdate}
-# We can't autopatch this because we have to add the header first:
-mkdir -p hw/xfree86/common
-cp %{SOURCE1} hw/xfree86/common/
-%endif
-
 %build
 %meson \
-        %{?gitdate:-Dxvfb=false} \
+	%{?gitdate:-Dxwayland=true -D{xorg,xnest,xvfb,udev}=false} \
         -Ddefault_font_path=%{default_font_path} \
         -Dbuilder_string="Build ID: %{name} %{version}-%{release}" \
         -Dxkb_output_dir=%{_localstatedir}/lib/xkb \
@@ -141,7 +134,6 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/xwayland/protocol.txt
 
 %files devel
-%{_libdir}/pkgconfig/xwayland.pc
 
 %changelog
 * Wed August 11 2024 Jack Greiner <jack@emoss.org> - 24.1.2-1
