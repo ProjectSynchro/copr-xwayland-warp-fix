@@ -8,7 +8,7 @@
 
 Summary:   Xwayland
 Name:      xorg-x11-server-Xwayland
-Version:   24.1.3
+Version:   24.1.4
 Release:   1%{?gitdate:.%{gitdate}git%{shortcommit}}%{?dist}
 
 URL:       http://www.x.org
@@ -137,6 +137,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_libdir}/pkgconfig/xwayland.pc
 
 %changelog
+* Thu October 31 2024 Jack Greiner <jack@emoss.org> - 24.1.4-1
+- xwayland 24.1.4
+
 * Tue October 22 2024 Jack Greiner <jack@emoss.org> - 24.1.3-1
 - xwayland 24.1.3
 
