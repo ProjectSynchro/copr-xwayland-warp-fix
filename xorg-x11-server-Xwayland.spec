@@ -8,7 +8,7 @@
 
 Summary:   Xwayland
 Name:      xorg-x11-server-Xwayland
-Version:   24.1.4
+Version:   24.1.6
 Release:   1%{?gitdate:.%{gitdate}git%{shortcommit}}%{?dist}
 
 URL:       http://www.x.org
@@ -18,7 +18,9 @@ Source0:   https://gitlab.freedesktop.org/xorg/%{pkgname}/-/archive/%{commit}/%{
 Source0:   https://www.x.org/pub/individual/xserver/%{pkgname}-%{version}.tar.xz
 %endif
 
-Patch1:    xwayland-pointer-warp-fix.patch
+# Allow pointer warps even when cursor is visible.
+# https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/1839
+Patch:     https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/1839.patch
 
 License:   MIT
 
@@ -137,6 +139,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_libdir}/pkgconfig/xwayland.pc
 
 %changelog
+* Wed February 26 2025 Jack Greiner <jack@emoss.org> - 24.1.6-1
+- xwayland 24.1.6, add upstream pointer warp patch
+
 * Thu October 31 2024 Jack Greiner <jack@emoss.org> - 24.1.4-1
 - xwayland 24.1.4
 
